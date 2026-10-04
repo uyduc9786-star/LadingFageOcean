@@ -1,0 +1,4550 @@
+/* --- Biến màu sắc theo thiết kế --- */
+:root {
+  --green-dark: #0b5b2a;
+  --green-light: #167a38;
+  --gold-primary: #d59f2a;
+  --gold-light: #eab43d;
+  --header-height: 110px;
+  --page-gutter: 32px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  background: #fff;
+  color: #333;
+  overflow-x: hidden;
+}
+
+@supports (overflow: clip) {
+  body {
+    overflow-x: clip;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  width: min(1200px, calc(100% - var(--page-gutter)));
+  margin-inline: auto;
+}
+
+.hero-text,
+.intro-grid > *,
+.product-grid > *,
+.ocean-connect-box > *,
+.recipe-bonus-box > * {
+  min-width: 0;
+}
+
+#products,
+#recipes,
+#about,
+#contact {
+  scroll-margin-top: calc(var(--header-height) + 12px);
+}
+
+/* =========================================
+   1. HEADER
+   ========================================= */
+.header {
+  background: white;
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+.nav {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+.site-nav a {
+  text-decoration: none;
+  color: var(--green-dark);
+  font-weight: 700;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  color: var(--gold-primary);
+}
+/* Thêm mới đoạn này vào khu vực Header */
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Khoảng cách giữa 2 logo, bạn có thể tăng giảm tùy ý */
+}
+
+.logo-area img {
+  height: 70px; /* Tăng chiều cao lên 70px để logo to và rõ hơn */
+  max-width: 180px; /* Đề phòng ảnh quá dài làm hỏng layout */
+  object-fit: contain; /* Đảm bảo logo không bị méo tỉ lệ */
+}
+/* Chỉ nhắm vào logo thứ nhất */
+.logo-area img:first-child {
+  height: 80px; /* Thử tăng lên 120px (hoặc hơn) để phần logo thực sự to bằng logo UDD */
+}
+/* Chỉ nhắm vào logo thứ nhất */
+
+.nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 0;
+  border: 1px solid rgba(11, 91, 42, 0.18);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--green-dark);
+  cursor: pointer;
+}
+
+.nav-toggle__bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transition:
+    transform 0.25s ease,
+    opacity 0.2s ease;
+}
+
+.nav-toggle.is-active .nav-toggle__bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.is-active .nav-toggle__bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.is-active .nav-toggle__bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 820px) {
+  :root {
+    --header-height: 70px;
+  }
+
+  .header {
+    padding: 8px 0;
+  }
+
+  .logo-area {
+    gap: 10px;
+  }
+
+  .logo-area img {
+    height: 46px;
+    max-width: 120px;
+  }
+
+  .logo-area img:first-child {
+    height: 54px;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .site-nav {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 8px;
+    border: 1px solid rgba(11, 91, 42, 0.12);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 16px 35px rgba(11, 64, 35, 0.16);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease,
+      visibility 0.2s ease;
+  }
+
+  .site-nav.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .site-nav a {
+    padding: 13px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .site-nav a:hover,
+  .site-nav a:focus-visible {
+    background: #f2f7e8;
+  }
+}
+
+@media (max-width: 360px) {
+  .logo-area img {
+    height: 40px;
+    max-width: 100px;
+  }
+
+  .logo-area img:first-child {
+    height: 48px;
+  }
+}
+
+/* =========================================
+   2. HERO SECTION
+   ========================================= */
+.hero {
+  position: relative;
+  padding: 80px 0;
+  overflow: hidden;
+  /* Chèn đúng tên ảnh của bạn vào đây */
+  background: url("images/bannermoinhat10000.png") right center / cover no-repeat;
+  min-height: 650px;
+  display: flex;
+  align-items: center;
+}
+/* 2. TẠO HIỆU ỨNG KHÓI MỜ NHẸ (TINH CHỈNH Ở ĐÂY) */
+.hero-bg-overlay {
+  display: block; /* Bật lớp phủ lên lại */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Tạo gradient mờ từ bên trái sang. Bên trái đậm, bên phải mờ dần */
+  /* Thay đổi mã màu rgba(255, 255, 255, 0.7) nếu bạn muốn màu nền đậm hoặc nhạt hơn */
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  z-index: 1; /* Nằm dưới văn bản, trên hình nền */
+}
+/* 3. Phá bỏ chế độ chia 2 cột cũ */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: block; /* Sửa grid thành block */
+  width: 100%;
+}
+/* 4. XÓA BỎ HỘP NỀN TRẮNG VÀ ĐẨY CHỮ SANG PHẢI (TINH CHỈNH Ở ĐÂY) */
+.hero-text {
+  width: 100%;
+  max-width: 600px;
+  /* Xóa bỏ nền trắng và bóng bo vuông */
+  /* background: rgba(255, 255, 255, 0.9); */
+  /* border-radius: 20px; */
+  /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); */
+
+  background-color: transparent; /* Đặt nền trong suốt */
+
+  /* Đẩy chữ sang phải (Tăng padding-left) */
+  padding-left: 50px; /* Thêm 50px từ mép trái container */
+  padding-right: 20px; /* Thêm padding bên phải để cân đối */
+  padding-top: 40px; /* Giữ padding trên dưới để cân đối với button */
+  padding-bottom: 40px;
+}
+
+/* Typography Hero */
+.cursive-title {
+  font-family: "Dancing Script", cursive;
+  font-size: clamp(52px, 4.9vw, 70px);
+  color: var(--gold-primary);
+  font-weight: 700;
+  line-height: 0.8;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+.main-title {
+  font-size: clamp(38px, 3.35vw, 48px);
+  color: var(--green-dark);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+.sub-title {
+  font-size: clamp(21px, 1.7vw, 24px);
+  color: var(--green-dark);
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 15px;
+}
+.description {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.highlight-text {
+  color: var(--green-light);
+  font-weight: 800;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: 100%;
+  padding: 16px 35px;
+  background: linear-gradient(to bottom, #ecc14f, #d59f2a);
+  color: white;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 16px;
+  box-shadow: 0 6px 15px rgba(213, 159, 42, 0.4);
+  transition: all 0.3s ease;
+  border: 2px solid #fff;
+  text-align: center;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(213, 159, 42, 0.6);
+}
+
+.btn-primary i {
+  flex: 0 0 auto;
+  font-size: 16px;
+}
+
+.hero-image img {
+  width: 120%;
+  margin-left: -10%;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.15));
+}
+
+/* =========================================
+   3. FEATURES BAR (Thanh cam kết) - CẬP NHẬT MỚI
+   ========================================= */
+.features {
+  background: var(--green-dark); /* Màu nền xanh đậm của bạn */
+  padding: 30px 0; /* Padding trên dưới */
+  color: white; /* Màu chữ trắng */
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center; /* Căn giữa theo chiều dọc */
+  text-align: left; /* Chữ căn trái */
+  padding: 0 20px;
+  position: relative; /* Dùng để tạo đường kẻ mờ ngăn cách */
+}
+
+/* Tạo đường kẻ mờ ngăn cách giữa các item (giống mockup) */
+.feature-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%; /* Căn giữa theo chiều dọc */
+  right: -10px; /* Nằm bên phải của item */
+  transform: translateY(-50%);
+  width: 1px;
+  height: 60%; /* Chiều cao đường kẻ */
+  background-color: rgba(255, 255, 255, 0.2); /* Màu trắng mờ */
+}
+
+.feature-item span {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.feature-item strong {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+/* Định dạng Vòng tròn trắng (Chứa Icon) */
+.icon-circle {
+  width: 50px; /* Tăng kích thước vòng tròn lên một chút */
+  height: 50px;
+  background: white; /* Nền trắng */
+  border-radius: 50%;
+  display: flex;
+  align-items: center; /* Căn giữa icon theo chiều dọc */
+  justify-content: center; /* Căn giữa icon theo chiều ngang */
+  margin-right: 15px;
+  flex-shrink: 0;
+  /* Viền xanh nhẹ bên ngoài vòng tròn trắng (giống mockup) */
+  border: 2px solid rgba(22, 122, 56, 0.5); /* var(--green-light) với độ mờ 0.5 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05); /* Bóng nhẹ để nổi bật */
+}
+
+/* Định dạng cho Icon (Phần xanh bên trong) */
+.icon-circle i {
+  font-size: 22px; /* Kích thước icon */
+  color: var(--green-light); /* Màu xanh nhẹ của bạn cho icon */
+}
+
+/* =========================================
+   4. CÁC PHẦN CÒN LẠI (Giữ nguyên của bạn)
+   ========================================= */
+/* =========================================
+   4. INTRO SECTION (Nội dung giới thiệu)
+   ========================================= */
+.intro {
+  padding: 80px 0 20px;
+  background: #fff;
+}
+
+/* Hàng trên: Chia 3 cột */
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr 1fr; /* Cột giữa to nhất để chứa text */
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 60px; /* Tạo khoảng cách với 5 ảnh bên dưới */
+}
+
+/* Định dạng Ảnh bát matcha (Cột trái) */
+.intro-left img {
+  width: 100%;
+  object-fit: contain;
+}
+
+/* Định dạng Text (Cột giữa) */
+.intro-title {
+  color: var(--green-dark);
+  font-weight: 800;
+  font-size: clamp(22px, 2.2vw, 24px);
+  line-height: 1.4;
+  margin-bottom: 15px;
+}
+.intro-title span {
+  font-size: clamp(18px, 1.8vw, 20px);
+}
+.intro-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 25px;
+}
+
+/* Danh sách tích xanh */
+.intro-list {
+  list-style: none; /* Bỏ dấu chấm mặc định */
+  padding: 0;
+}
+.intro-list li {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: flex-start; /* Để icon luôn nằm ngang hàng dòng đầu tiên */
+  gap: 12px; /* Khoảng cách giữa icon và chữ */
+}
+.intro-list li i {
+  color: var(--green-light); /* Màu xanh cho dấu tích */
+  font-size: 20px;
+  margin-top: 2px; /* Chỉnh icon cân đối với chữ */
+}
+.intro-list li strong {
+  color: #222;
+  white-space: nowrap; /* Không cho chữ nhãn bị rớt dòng */
+}
+
+/* Giấy chứng nhận và Huy hiệu (Cột phải) */
+.cert-wrapper {
+  position: relative; /* Làm khung chứa để huy hiệu neo vào */
+  display: inline-block;
+}
+.cert-img {
+  width: 100%;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+.cert-badge {
+  position: absolute;
+  bottom: -20px; /* Thò ra ngoài một chút ở góc dưới */
+  right: -20px; /* Thò ra ngoài một chút ở góc phải */
+  width: 100px; /* Chỉnh độ to của huy hiệu */
+  z-index: 2;
+}
+
+@media (max-width: 1100px) {
+  .cert-badge {
+    right: 4px;
+  }
+}
+
+/* Hàng dưới: 5 Ứng dụng */
+.intro-apps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Chia 5 cột đều nhau */
+  gap: 20px;
+  text-align: center;
+}
+.app-item img {
+  width: 100%;
+  max-width: 140px; /* Khống chế độ to tối đa */
+  aspect-ratio: 1 / 1; /* Cắt ảnh thành hình vuông */
+  object-fit: cover;
+  border-radius: 20px; /* Bo góc tròn */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  margin-bottom: 15px;
+}
+.app-item p {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--green-dark);
+}
+
+/* Responsive cho phần Intro */
+@media (max-width: 992px) {
+  .intro-grid {
+    grid-template-columns: 1fr; /* Gộp thành 1 cột trên mobile */
+    gap: 32px;
+    text-align: center;
+  }
+
+  .intro-left img {
+    max-width: 420px;
+  }
+
+  .intro-left,
+  .intro-right {
+    text-align: center;
+  }
+
+  .cert-wrapper {
+    width: min(100%, 420px);
+    margin-inline: auto;
+  }
+
+  .intro-list li {
+    text-align: left; /* Giữ chữ list căn trái dễ đọc */
+  }
+  .intro-apps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .intro {
+    padding-top: 56px;
+  }
+
+  .intro-grid {
+    margin-bottom: 42px;
+  }
+
+  .intro-apps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+}
+
+@media (max-width: 400px) {
+  .intro-list li strong {
+    white-space: normal;
+  }
+}
+
+/* =====================================================
+   PRODUCTS SECTION
+   ===================================================== */
+
+.products {
+  padding: 20px 0 22px;
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(233, 245, 233, 0.45),
+      transparent 35%
+    ),
+    #ffffff;
+}
+
+
+/* ==========================================
+   HEADING
+   ========================================== */
+
+.products-heading {
+  text-align: center;
+  margin-bottom: 55px;
+}
+
+.heading-leaf {
+  color: var(--gold-primary);
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.products .section-title {
+  color: var(--green-dark);
+  font-size: clamp(24px, 2.4vw, 30px);
+  line-height: 1.3;
+  font-weight: 900;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.heading-decoration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--gold-primary);
+}
+
+.heading-decoration span {
+  width: 55px;
+  height: 1px;
+  background: var(--gold-primary);
+  opacity: 0.6;
+}
+
+.heading-decoration i {
+  font-size: 11px;
+}
+
+
+/* ==========================================
+   PRODUCT GRID
+   ========================================== */
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+
+/* ==========================================
+   CARD
+   ========================================== */
+
+.card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #ffffff;
+
+  padding: 52px 26px 26px;
+
+  border-radius: 22px;
+
+  text-align: center;
+  min-width: 0;
+
+  box-shadow:
+    0 8px 28px rgba(12, 70, 42, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.03);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-7px);
+
+  box-shadow:
+    0 18px 40px rgba(12, 70, 42, 0.11),
+    0 5px 12px rgba(0, 0, 0, 0.04);
+}
+
+
+.card.border-green {
+  border: 1.5px solid rgba(11, 91, 42, 0.65);
+}
+
+
+.card.border-gold {
+  border: 1.5px solid var(--gold-primary);
+}
+
+
+/* Gói 500g nổi bật hơn */
+
+.business-card {
+  box-shadow:
+    0 12px 35px rgba(213, 159, 42, 0.11),
+    0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+
+/* ==========================================
+   CARD LABEL
+   ========================================== */
+
+.card-header {
+  position: absolute;
+
+  top: -16px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  padding: 9px 26px;
+
+  border-radius: 50px;
+
+  color: white;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  white-space: nowrap;
+
+  letter-spacing: 0.2px;
+
+  box-shadow:
+    0 5px 12px rgba(0, 0, 0, 0.14);
+}
+
+
+.bg-green {
+  background:
+    linear-gradient(
+      135deg,
+      #08723c,
+      #064c29
+    );
+}
+
+
+.bg-gold {
+  background:
+    linear-gradient(
+      135deg,
+      #ebb12e,
+      #d5900d
+    );
+}
+
+
+/* ==========================================
+   BEST SELLER
+   ========================================== */
+
+.badge-best-seller {
+  position: absolute;
+
+  top: -20px;
+  right: -17px;
+
+  width: 63px;
+  height: 63px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ff3d46,
+      #d8172b
+    );
+
+  color: white;
+
+  border-radius: 50%;
+
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1.15;
+
+  transform: rotate(12deg);
+
+  box-shadow:
+    0 8px 18px rgba(220, 30, 45, 0.3);
+
+  z-index: 5;
+}
+
+@media (max-width: 1100px) {
+  .badge-best-seller {
+    right: 4px;
+  }
+}
+
+
+/* ==========================================
+   PRODUCT IMAGE
+   ========================================== */
+
+.card-img-wrap {
+  position: relative;
+
+  width: 220px;
+  max-width: 100%;
+  height: 220px;
+
+  margin:
+    4px auto
+    16px;
+}
+
+
+.card-img-wrap img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  transition: transform 0.3s ease;
+}
+
+
+.card:hover .card-img-wrap img {
+  transform: scale(1.035);
+}
+
+
+/* ==========================================
+   WEIGHT BADGE
+   ========================================== */
+
+.weight-badge {
+  position: absolute;
+
+  right: 3px;
+  bottom: 15px;
+
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: white;
+
+  font-size: 13px;
+  font-weight: 900;
+
+  border: 3px solid white;
+
+  box-shadow:
+    0 5px 12px rgba(0, 0, 0, 0.17);
+}
+
+
+/* ==========================================
+   CARD TEXT
+   ========================================== */
+
+.card h3 {
+  color: #252525;
+
+  font-size: 19px;
+
+  font-weight: 800;
+
+  margin-bottom: 7px;
+}
+
+
+.card .price {
+  color: #e42531;
+
+  font-size: 26px;
+
+  font-weight: 900;
+
+  margin-bottom: 11px;
+}
+
+
+.card p {
+  color: #777;
+
+  font-size: 13px;
+
+  line-height: 1.55;
+
+  min-height: 42px;
+
+  margin-bottom: 19px;
+}
+
+
+/* ==========================================
+   WHOLESALE PILL
+   ========================================== */
+
+.wholesale-pill {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  align-self: center;
+
+  margin:
+    -4px auto
+    16px;
+
+  padding:
+    7px 15px;
+
+  border:
+    1px solid rgba(11, 91, 42, 0.55);
+
+  border-radius: 50px;
+
+  background:
+    #f0f8f2;
+
+  color:
+    var(--green-dark);
+
+  text-decoration: none;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  transition:
+    all 0.25s ease;
+}
+
+
+.wholesale-pill:hover {
+  background:
+    var(--green-dark);
+
+  color:
+    white;
+
+  transform:
+    translateY(-2px);
+}
+
+
+/* ==========================================
+   BUY BUTTONS
+   ========================================== */
+
+.card-buttons {
+  display: flex;
+
+  gap: 9px;
+
+  margin-top: auto;
+}
+
+
+.btn-buy {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding:
+    11px
+    8px;
+
+  border-radius: 50px;
+
+  text-decoration: none;
+
+  color: white !important;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  transition:
+    all 0.25s ease;
+}
+
+
+.btn-tiktok {
+  background: #050505;
+}
+
+
+.btn-tiktok:hover {
+  background: #242424;
+
+  transform:
+    translateY(-2px);
+}
+
+
+.btn-shopee {
+  background:
+    linear-gradient(
+      135deg,
+      #ff5a37,
+      #ee4027
+    );
+}
+
+
+.btn-shopee:hover {
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 5px 12px
+    rgba(238, 77, 45, 0.25);
+}
+
+
+/* =====================================================
+   WHOLESALE ZALO BANNER
+   ===================================================== */
+
+.wholesale-banner {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: 118px;
+
+  margin-top: 46px;
+  padding: 22px 185px 22px 78px;
+
+  border: 1px solid rgba(11, 91, 42, 0.12);
+  border-radius: 21px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ffffff 0%,
+      #fbfcf6 36%,
+      #f3f7e7 70%,
+      #edf3d8 100%
+    );
+
+  box-shadow:
+    0 10px 28px rgba(30, 71, 45, 0.08);
+
+  isolation: isolate;
+}
+
+
+/* =========================
+   LÁ TRANG TRÍ BÊN TRÁI
+   ========================= */
+
+.zalo-banner-leaf {
+  position: absolute;
+
+  left: -2px;
+  bottom: -2px;
+
+  width: 78px;
+  height: auto;
+
+  object-fit: contain;
+
+  z-index: 0;
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   BÁT MATCHA BÊN PHẢI
+   ========================= */
+
+.zalo-banner-matcha {
+  position: absolute;
+
+  right: -1px;
+  bottom: -1px;
+  top: auto;
+
+  width: 190px;
+  height: calc(100% + 2px);
+
+  object-fit: cover;
+  object-position: right bottom;
+
+  display: block;
+
+  z-index: 1;
+  pointer-events: none;
+}
+
+
+/* =========================
+   PHẦN NỘI DUNG TRÁI
+   ========================= */
+
+.wholesale-left {
+  position: relative;
+  z-index: 3;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 22px;
+}
+
+
+/* ZALO LOGO */
+
+.wholesale-zalo-icon {
+  width: 70px;
+  height: 70px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      145deg,
+      #1688ff,
+      #0068ff
+    );
+
+  color: #ffffff;
+
+  border: 5px solid #ffffff;
+
+  border-radius: 20px;
+
+  font-size: 16px;
+  font-weight: 900;
+
+  box-shadow:
+    0 6px 16px rgba(0, 104, 255, 0.28);
+}
+
+
+/* TEXT */
+
+.wholesale-copy {
+  position: relative;
+  z-index: 3;
+  min-width: 0;
+}
+
+.wholesale-copy h3 {
+  margin: 0 0 5px;
+
+  color: #0b5b2a;
+
+  font-size: 26px;
+  line-height: 1.15;
+
+  font-weight: 900;
+}
+
+.wholesale-copy p {
+  margin: 0;
+
+  color: #40554a;
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+/* =========================
+   BUTTON
+   ========================= */
+
+.wholesale-right {
+  position: relative;
+  z-index: 4;
+
+  flex-shrink: 0;
+}
+
+
+.btn-wholesale {
+  min-width: 285px;
+  max-width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 17px;
+
+  padding: 17px 28px;
+
+  border-radius: 999px;
+
+  border: 2px solid #dda62a;
+
+  background:
+    linear-gradient(
+      180deg,
+      #13834c 0%,
+      #076b3a 52%,
+      #075b32 100%
+    );
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 15px;
+  font-weight: 900;
+
+  box-shadow:
+    0 6px 12px rgba(5, 91, 48, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.btn-wholesale:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 9px 19px rgba(5, 91, 48, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+
+.btn-wholesale i {
+  font-size: 13px;
+}
+
+@media (max-width: 992px) {
+
+  .wholesale-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding:
+      25px
+      150px
+      25px
+      30px;
+
+    gap: 20px;
+  }
+
+  .zalo-banner-matcha {
+    width: 150px;
+  }
+
+  .btn-wholesale {
+    width: 100%;
+    min-width: 230px;
+  }
+
+  .wholesale-right {
+    width: 100%;
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .wholesale-banner {
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding:
+      28px
+      22px
+      130px;
+
+    min-height: auto;
+  }
+
+
+  .wholesale-left {
+    align-items: center;
+  }
+
+
+  .wholesale-right {
+    width: 100%;
+  }
+
+
+  .btn-wholesale {
+    width: 100%;
+    min-width: 0;
+  }
+
+
+  .zalo-banner-matcha {
+    width: 190px;
+    height: 115px;
+
+    top: auto;
+    right: 0;
+    bottom: 0;
+  }
+
+
+  .zalo-banner-leaf {
+    width: 65px;
+  }
+
+}
+
+
+@media (max-width: 480px) {
+
+  .wholesale-left {
+    gap: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+
+  .wholesale-zalo-icon {
+    width: 55px;
+    height: 55px;
+
+    border-radius: 16px;
+
+    font-size: 13px;
+  }
+
+
+  .wholesale-copy h3 {
+    font-size: 19px;
+  }
+
+
+  .wholesale-copy p {
+    font-size: 11px;
+  }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 992px) {
+
+  .product-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+
+  .business-card {
+    grid-column:
+      1 / -1;
+
+    width: 50%;
+
+    justify-self: center;
+  }
+
+
+}
+
+
+@media (max-width: 768px) {
+
+  .products {
+    padding:
+      70px
+      0
+      55px;
+  }
+
+
+  .products .section-title {
+    font-size: 24px;
+  }
+
+
+  .product-grid {
+    grid-template-columns: 1fr;
+
+    gap: 35px;
+  }
+
+
+  .business-card {
+    grid-column: auto;
+
+    width: 100%;
+  }
+
+
+  .card {
+    max-width: 430px;
+
+    width: 100%;
+
+    margin: auto;
+
+    padding:
+      48px
+      22px
+      24px;
+  }
+
+
+}
+
+
+@media (max-width: 480px) {
+
+  .products-heading {
+    margin-bottom: 45px;
+  }
+
+
+  .products .section-title {
+    font-size: 21px;
+  }
+
+
+  .card-img-wrap {
+    width: 190px;
+
+    height: 190px;
+  }
+
+
+  .card-buttons {
+    gap: 7px;
+  }
+
+}
+
+/* =========================================================
+   OCEAN CHEF CONNECT
+   ZALO SUPPORT + FACEBOOK
+   ========================================================= */
+
+.ocean-connect {
+  padding: 14px 0 30px;
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.ocean-connect-box {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: minmax(0, 59%) minmax(0, 41%);
+
+  overflow: hidden;
+
+  padding: 45px 0 105px 45px;
+
+  border-radius: 30px;
+
+  border: 1px solid rgba(11, 91, 42, 0.13);
+
+  background:
+    radial-gradient(
+      circle at 88% 38%,
+      rgba(183, 213, 131, 0.23),
+      transparent 33%
+    ),
+    linear-gradient(
+      115deg,
+      #ffffff 0%,
+      #fcfdf9 43%,
+      #eff5e4 100%
+    );
+
+  box-shadow:
+    0 18px 50px rgba(21, 73, 42, 0.08);
+}
+
+
+/* =========================================================
+   LEFT CONTENT
+   ========================================================= */
+
+.ocean-connect-content {
+  position: relative;
+  z-index: 5;
+  min-width: 0;
+
+  padding-right: 25px;
+}
+
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.connect-heading {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 18px;
+}
+
+
+.connect-main-icon {
+  width: 62px;
+  height: 62px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #388e32,
+      #07562c
+    );
+
+  color: white;
+
+  font-size: 24px;
+
+  border: 5px solid white;
+
+  box-shadow:
+    0 7px 18px rgba(22, 91, 48, 0.20);
+}
+
+
+.connect-small-title {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--green-dark);
+
+  font-size: 13px;
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+
+.connect-heading h2 {
+  margin: 0;
+
+  color: var(--green-dark);
+
+  font-size: 37px;
+  line-height: 1.13;
+
+  font-weight: 900;
+
+  letter-spacing: -0.6px;
+}
+
+
+.connect-title-line {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 14px;
+
+  color: var(--gold-primary);
+}
+
+
+.connect-title-line span {
+  width: 52px;
+  height: 1px;
+
+  background: var(--gold-primary);
+}
+
+
+.connect-title-line i {
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.connect-description {
+  max-width: 670px;
+
+  margin:
+    20px
+    0
+    25px;
+
+  color: #4f5c54;
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   CONTACT CARDS
+   ========================================================= */
+
+.connect-card-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 17px;
+
+  max-width: 715px;
+  min-width: 0;
+}
+
+
+.connect-contact-card {
+  display: flex;
+  flex-direction: column;
+
+  min-height: 290px;
+  min-width: 0;
+
+  padding: 22px;
+
+  border-radius: 21px;
+
+  border: 1px solid rgba(11, 91, 42, 0.10);
+
+  background:
+    rgba(255, 255, 255, 0.90);
+
+  box-shadow:
+    0 9px 26px
+    rgba(24, 73, 44, 0.07);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+.connect-contact-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 16px 33px
+    rgba(24, 73, 44, 0.12);
+}
+
+
+/* =========================================================
+   CARD HEAD
+   ========================================================= */
+
+.connect-card-heading {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  margin-bottom: 21px;
+}
+
+
+.connect-platform-icon {
+  width: 58px;
+  height: 58px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #ffffff;
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 7px 17px
+    rgba(0, 0, 0, 0.12);
+}
+
+
+.connect-zalo-icon {
+  background:
+    linear-gradient(
+      145deg,
+      #2095ff,
+      #0068ff
+    );
+
+  border: 4px solid white;
+
+  font-size: 13px;
+  font-weight: 900;
+}
+
+
+.connect-facebook-icon {
+  background:
+    linear-gradient(
+      145deg,
+      #2687ff,
+      #1261d4
+    );
+
+  font-size: 28px;
+}
+
+
+.connect-card-title > span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #0874e5;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.2px;
+}
+
+
+.connect-card-title h3 {
+  margin:
+    0
+    0
+    3px;
+
+  color: var(--green-dark);
+
+  font-size: 20px;
+
+  font-weight: 900;
+}
+
+
+.connect-card-title p {
+  margin: 0;
+
+  color: #626c65;
+
+  font-size: 10px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   CHECK LIST
+   ========================================================= */
+
+.connect-check-list {
+  list-style: none;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 11px;
+
+  padding: 0;
+
+  margin:
+    0
+    0
+    22px;
+}
+
+
+.connect-check-list li {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 9px;
+
+  color: #505a53;
+
+  font-size: 11px;
+
+  line-height: 1.4;
+}
+
+
+.connect-check-list li i {
+  margin-top: 1px;
+
+  color: #25813d;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.connect-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 13px;
+
+  width: 100%;
+
+  margin-top: auto;
+
+  padding:
+    13px
+    18px;
+
+  border-radius: 999px;
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 12px;
+
+  font-weight: 900;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.connect-action-btn:hover {
+  transform: translateY(-2px);
+}
+
+
+.connect-zalo-btn {
+  background:
+    linear-gradient(
+      135deg,
+      #168cff,
+      #0068e9
+    );
+
+  box-shadow:
+    0 7px 17px
+    rgba(0, 104, 255, 0.22);
+}
+
+
+.connect-facebook-btn {
+  background:
+    linear-gradient(
+      135deg,
+      #21934b,
+      #086432
+    );
+
+  box-shadow:
+    0 7px 17px
+    rgba(8, 100, 50, 0.20);
+}
+
+
+/* =========================================================
+   RIGHT PRODUCT AREA
+   ========================================================= */
+
+.ocean-connect-visual {
+  position: relative;
+
+  min-height: 440px;
+
+  z-index: 2;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+
+/* =========================================================
+   BOTTOM BENEFITS
+   ========================================================= */
+
+.connect-benefits {
+  position: absolute;
+
+  z-index: 15;
+
+  left: 48px;
+  right: 48px;
+  bottom: 25px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  padding:
+    15px
+    12px;
+
+  border-radius: 18px;
+
+  border:
+    1px solid
+    rgba(11, 91, 42, 0.10);
+
+  background:
+    rgba(255, 255, 255, 0.91);
+
+  backdrop-filter:
+    blur(8px);
+
+  box-shadow:
+    0 8px 20px
+    rgba(27, 70, 44, 0.06);
+}
+
+
+.connect-benefit-item {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding:
+    0
+    15px;
+}
+
+
+.connect-benefit-item:not(:last-child)::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  right: 0;
+
+  width: 1px;
+  height: 35px;
+
+  transform:
+    translateY(-50%);
+
+  background:
+    rgba(11, 91, 42, 0.13);
+}
+
+
+.connect-benefit-icon {
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color:
+    var(--green-dark);
+
+  font-size: 18px;
+}
+
+
+.connect-benefit-item strong,
+.connect-benefit-item span {
+  display: block;
+}
+
+
+.connect-benefit-item strong {
+  margin-bottom: 2px;
+
+  color:
+    var(--green-dark);
+
+  font-size: 11px;
+
+  line-height: 1.25;
+}
+
+
+.connect-benefit-item span {
+  color: #727d76;
+
+  font-size: 9px;
+
+  line-height: 1.3;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+  .ocean-connect-box {
+    grid-template-columns:
+      60% 40%;
+
+    padding:
+      40px
+      32px
+      110px;
+  }
+
+
+  .connect-heading h2 {
+    font-size: 31px;
+  }
+
+
+  .connect-description {
+    font-size: 13px;
+  }
+
+
+  .connect-benefits {
+    left: 32px;
+    right: 32px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 820px) {
+
+  .ocean-connect {
+    padding:
+      48px
+      0
+      60px;
+  }
+
+
+  .ocean-connect-box {
+    display: flex;
+    flex-direction: column;
+
+    padding:
+      30px
+      20px
+      22px;
+
+    border-radius: 24px;
+  }
+
+
+  .ocean-connect-content {
+    padding-right: 0;
+  }
+
+
+  /* Heading center */
+
+  .connect-heading {
+    display: block;
+
+    text-align: center;
+  }
+
+
+  .connect-main-icon {
+    width: 55px;
+    height: 55px;
+
+    margin:
+      0
+      auto
+      13px;
+  }
+
+
+  .connect-small-title {
+    font-size: 10px;
+  }
+
+
+  .connect-heading h2 {
+    font-size: 27px;
+
+    line-height: 1.15;
+  }
+
+
+  .connect-title-line {
+    justify-content: center;
+  }
+
+
+  .connect-description {
+    max-width: 530px;
+
+    margin:
+      18px
+      auto
+      24px;
+
+    text-align: center;
+
+    font-size: 12px;
+  }
+
+
+  /* Cards vertical */
+
+  .connect-card-grid {
+    grid-template-columns: 1fr;
+
+    max-width: none;
+  }
+
+
+  .connect-contact-card {
+    min-height: auto;
+  }
+
+
+  /*
+     Mobile: card heading + button
+     vẫn rõ nhưng không chiếm quá nhiều màn hình
+  */
+
+  .connect-card-heading {
+    margin-bottom: 16px;
+  }
+
+
+  .connect-check-list {
+    margin-bottom: 18px;
+  }
+
+
+  /*
+     Benefit không dùng absolute trên mobile
+  */
+
+  .connect-benefits {
+    position: relative;
+
+    left: auto;
+    right: auto;
+    bottom: auto;
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    margin-top: 22px;
+
+    row-gap: 18px;
+  }
+
+
+  .connect-benefit-item:nth-child(2)::after {
+    display: none;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .ocean-connect .container {
+    width: calc(100% - 22px);
+  }
+
+
+  .ocean-connect-box {
+    padding:
+      26px
+      14px
+      18px;
+
+    border-radius: 21px;
+  }
+
+
+  .connect-heading h2 {
+    font-size: 23px;
+  }
+
+
+  .connect-description {
+    font-size: 11.5px;
+
+    line-height: 1.65;
+  }
+
+
+  .connect-contact-card {
+    padding: 18px;
+
+    border-radius: 18px;
+  }
+
+
+  .connect-platform-icon {
+    width: 51px;
+    height: 51px;
+  }
+
+
+  .connect-card-title > span {
+    font-size: 9px;
+  }
+
+
+  .connect-card-title h3 {
+    font-size: 18px;
+  }
+
+
+  .connect-check-list li {
+    font-size: 10px;
+  }
+
+
+  .connect-action-btn {
+    font-size: 11px;
+
+    padding: 12px;
+  }
+
+
+  .connect-benefits {
+    padding:
+      14px
+      5px;
+  }
+
+
+  .connect-benefit-item {
+    gap: 5px;
+
+    padding:
+      0
+      7px;
+  }
+
+
+  .connect-benefit-icon {
+    width: 30px;
+    height: 30px;
+
+    font-size: 14px;
+  }
+
+
+  .connect-benefit-item strong {
+    font-size: 9px;
+  }
+
+
+  .connect-benefit-item span {
+    font-size: 9px;
+  }
+
+}
+/* =====================================================
+   COMPANY ABOUT - BANNER NGANG GỌN HƠN
+===================================================== */
+.company-about {
+  padding: 0 0 45px;
+  background: #ffffff;
+}
+
+.company-about__banner {
+  position: relative;
+  overflow: hidden;
+
+  width: 100%;
+  max-width: 1200px;
+  min-height: 300px;
+
+  margin: 0 auto;
+
+  border-radius: 28px;
+  border: 1px solid rgba(92, 118, 57, 0.15);
+
+  background:
+    url("images/company-about-bg.png")
+    center center / cover no-repeat;
+
+  box-shadow:
+    0 18px 40px rgba(54, 73, 35, 0.08);
+
+  display: flex;
+  align-items: center;
+}
+
+/* LEFT */
+.company-about__content {
+  position: relative;
+  z-index: 2;
+  width: 52%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 40px 0 38px 48px;
+}
+
+.company-about__tag {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 16px;
+  margin-bottom: 16px;
+
+  border-radius: 999px;
+  background: #eaf1d9;
+  color: #64853a;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.company-about__title {
+  margin: 0 0 8px;
+
+  color: #234d22;
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(38px, 3.1vw, 44px);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -1px;
+}
+
+.company-about__subtitle {
+  margin: 0;
+  color: #3e493f;
+
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.company-about__line {
+  width: 58px;
+  height: 3px;
+  margin: 14px 0 16px;
+  border-radius: 999px;
+  background: #638534;
+}
+
+.company-about__desc {
+  max-width: 430px;
+  margin: 0 0 22px;
+
+  color: #556055;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* FEATURE */
+.company-about__features {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 22px;
+}
+
+.company-about__feature {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 0 18px;
+  min-height: 42px;
+
+  color: #293328;
+  font-size: 12px;
+}
+
+.company-about__feature:first-child {
+  padding-left: 0;
+}
+
+.company-about__feature:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 7px;
+  right: 0;
+  width: 1px;
+  height: 28px;
+  background: rgba(98, 121, 64, 0.18);
+}
+
+.company-about__icon {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: #edf3dd;
+  color: #6a8c3b;
+  font-size: 14px;
+}
+
+.company-about__feature strong {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* BUTTON */
+.company-about__btn {
+  width: fit-content;
+  min-width: 195px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  padding: 13px 22px;
+
+  border-radius: 999px;
+  text-decoration: none;
+
+  background: linear-gradient(135deg, #739c3e, #56862b);
+  color: #fff;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  box-shadow: 0 8px 18px rgba(86, 134, 43, 0.22);
+  transition: all 0.25s ease;
+}
+
+.company-about__btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Overlay giữ chữ rõ trong khi vẫn để lộ visual ở bên phải. */
+.company-about__banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 249, 0.98) 0%,
+    rgba(255, 255, 249, 0.94) 30%,
+    rgba(255, 255, 249, 0.65) 46%,
+    rgba(255, 255, 249, 0.1) 63%,
+    rgba(255, 255, 249, 0) 100%
+  );
+  pointer-events: none;
+}
+
+.company-about__banner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 180px;
+  height: 140px;
+
+  background:
+    radial-gradient(circle at 70% 30%, rgba(210, 227, 180, 0.18), transparent 60%);
+  pointer-events: none;
+}
+
+/* TABLET */
+@media (max-width: 992px) {
+  .company-about__banner {
+    min-height: 340px;
+    background-position: 64% center;
+  }
+
+  .company-about__content {
+    width: 68%;
+    padding: 34px 24px 30px;
+  }
+
+  .company-about__title {
+    font-size: 40px;
+  }
+
+  .company-about__features {
+    flex-wrap: wrap;
+    row-gap: 12px;
+  }
+
+  .company-about__feature strong {
+    white-space: normal;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 576px) {
+  .company-about {
+    padding: 40px 0 55px;
+  }
+
+  .company-about__banner {
+    min-height: 0;
+    border-radius: 20px;
+    background:
+      #f8f9f0
+      url("images/company-about-bg.png") center bottom / 100% auto no-repeat;
+  }
+
+  .company-about__content {
+    width: 100%;
+    padding: 24px 18px clamp(180px, 52vw, 280px);
+  }
+
+  .company-about__title {
+    font-size: clamp(29px, 9vw, 33px);
+  }
+
+  .company-about__subtitle {
+    font-size: 15px;
+  }
+
+  .company-about__desc {
+    font-size: 13px;
+  }
+
+  .company-about__features {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .company-about__feature {
+    padding: 0;
+  }
+
+  .company-about__feature::after {
+    display: none;
+  }
+
+  .company-about__btn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .company-about__banner::before {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 249, 0.99) 0%,
+      rgba(255, 255, 249, 0.97) 58%,
+      rgba(255, 255, 249, 0.68) 73%,
+      rgba(255, 255, 249, 0) 100%
+    );
+  }
+}
+
+footer {
+  background: #0d5b28;
+  color: white;
+  padding: 25px;
+}
+
+.footer-grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* =========================================
+   5. RESPONSIVE (Dành cho điện thoại/Tablet)
+   ========================================= */
+@media (max-width: 992px) {
+  .hero {
+    min-height: 560px;
+    padding: 56px 0;
+    background-position: 68% center;
+  }
+
+  .hero-content {
+    text-align: center;
+  }
+
+  .hero-bg-overlay {
+    background: rgba(255, 255, 255, 0.85);
+  }
+
+  .hero-text {
+    margin: 0 auto;
+    padding: 32px 20px;
+  }
+
+  .cursive-title {
+    font-size: 55px;
+  }
+
+  .main-title {
+    font-size: 38px;
+  }
+
+  .feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .feature-item {
+    padding: 10px 20px;
+  }
+
+  .feature-item::after {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  :root {
+    --page-gutter: 20px;
+  }
+
+  .hero {
+    min-height: 520px;
+    padding: 42px 0;
+    background-position: 70% center;
+  }
+
+  .hero-text {
+    padding: 24px 0;
+  }
+
+  .cursive-title {
+    font-size: clamp(43px, 14vw, 52px);
+  }
+
+  .main-title {
+    font-size: clamp(29px, 9.5vw, 36px);
+  }
+
+  .sub-title {
+    font-size: clamp(18px, 5.8vw, 21px);
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .highlight-text {
+    font-size: 16px;
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 13px;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .feature-item {
+    padding: 8px 10px;
+  }
+
+  .footer-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 400px) {
+  :root {
+    --page-gutter: 16px;
+  }
+
+  .hero .sub-title br,
+  .hero .description br {
+    display: none;
+  }
+}
+/* =====================================================
+   RIGHT VISUAL - ẢNH MOCKUP HOÀN CHỈNH
+   ===================================================== */
+
+.connect-visual-image {
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+
+  inset: 0;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  border-radius: 0 29px 0 0;
+}
+.ocean-connect-visual::after {
+  content: "";
+
+  position: absolute;
+
+  z-index: 2;
+
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  width: 110px;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to right,
+      #fbfcf7 0%,
+      rgba(251, 252, 247, 0.78) 30%,
+      rgba(251, 252, 247, 0) 100%
+    );
+}
+@media (max-width: 820px) {
+  .ocean-connect-visual {
+    min-height: 0;
+
+    margin:
+      25px
+      -20px
+      -22px;
+
+    aspect-ratio: 1 / 0.9;
+  }
+
+
+  .connect-visual-image {
+    position: relative;
+
+    inset: auto;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius:
+      0
+      0
+      23px
+      23px;
+  }
+
+
+  .ocean-connect-visual::after {
+    display: none;
+  }
+
+}
+/* =========================================================
+   RECIPE BONUS
+   19 CÔNG THỨC MATCHA HOT TREND
+   ========================================================= */
+
+.recipe-bonus {
+  padding: 0 0 35px;
+
+  background:
+    #ffffff;
+}
+
+
+/* =========================================================
+   MAIN BOX
+   ========================================================= */
+
+.recipe-bonus-box {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 47%)
+    minmax(0, 53%);
+
+  min-height: 680px;
+
+  overflow: hidden;
+
+  padding:
+    55px
+    50px
+    120px;
+
+  border-radius: 32px;
+
+  border:
+    1px solid
+    rgba(82, 119, 38, 0.13);
+
+  background:
+    radial-gradient(
+      circle at 68% 35%,
+      rgba(188, 213, 140, 0.22),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 96% 5%,
+      rgba(223, 235, 191, 0.30),
+      transparent 25%
+    ),
+    linear-gradient(
+      125deg,
+      #fffef8 0%,
+      #fcfdf5 42%,
+      #f1f6df 100%
+    );
+
+  box-shadow:
+    0 18px 55px
+    rgba(47, 77, 31, 0.09);
+}
+
+
+/* =========================================================
+   BACKGROUND DECOR
+   ========================================================= */
+
+.recipe-bg-circle {
+  position: absolute;
+
+  pointer-events: none;
+
+  border-radius: 50%;
+}
+
+
+.recipe-bg-circle-1 {
+  width: 420px;
+  height: 420px;
+
+  right: 170px;
+  top: 40px;
+
+  background:
+    rgba(206, 224, 168, 0.15);
+}
+
+
+.recipe-bg-circle-2 {
+  width: 220px;
+  height: 220px;
+
+  right: -80px;
+  bottom: 90px;
+
+  background:
+    rgba(192, 215, 149, 0.15);
+}
+
+
+.recipe-deco-leaf {
+  position: absolute;
+
+  color:
+    rgba(76, 138, 46, 0.18);
+
+  pointer-events: none;
+}
+
+
+.recipe-leaf-1 {
+  right: 13px;
+  top: 13px;
+
+  font-size: 45px;
+
+  transform:
+    rotate(24deg);
+}
+
+
+.recipe-leaf-2 {
+  left: 47%;
+  bottom: 100px;
+
+  font-size: 55px;
+
+  transform:
+    rotate(-35deg);
+}
+
+
+/* =========================================================
+   LEFT CONTENT
+   ========================================================= */
+
+.recipe-content {
+  position: relative;
+
+  z-index: 10;
+
+  padding-right: 32px;
+}
+
+
+/* =========================================================
+   BONUS LABEL
+   ========================================================= */
+
+.recipe-bonus-label {
+  width: fit-content;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 28px;
+
+  padding:
+    8px
+    17px
+    8px
+    9px;
+
+  border-radius: 999px;
+
+  border:
+    1px solid
+    rgba(104, 139, 58, 0.24);
+
+  background:
+    rgba(240, 246, 223, 0.92);
+
+  color:
+    #456b29;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  letter-spacing: 0.3px;
+}
+
+
+.recipe-gift-small {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.83);
+
+  color:
+    #537b2f;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.recipe-main-title {
+  margin:
+    0
+    0
+    20px;
+
+  color:
+    #163d21;
+
+  font-size: clamp(38px, 4.4vw, 60px);
+
+  line-height: 1.05;
+
+  font-weight: 900;
+
+  letter-spacing: -1.3px;
+}
+
+
+.recipe-main-title span {
+  display: block;
+
+  margin-top: 7px;
+
+  color:
+    #769943;
+
+  font-size:
+    0.86em;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.recipe-description {
+  max-width: 510px;
+
+  margin-bottom: 27px;
+
+  color:
+    #505850;
+
+  font-size: 16px;
+
+  line-height: 1.75;
+}
+
+
+.recipe-description strong {
+  color:
+    #505850;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   RECIPE CHIPS
+   ========================================================= */
+
+.recipe-list-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+
+  max-width: 520px;
+
+  margin-bottom: 27px;
+}
+
+
+.recipe-chip {
+  min-height: 52px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding:
+    9px
+    14px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid
+    rgba(74, 102, 54, 0.07);
+
+  background:
+    rgba(255, 255, 255, 0.87);
+
+  box-shadow:
+    0 4px 13px
+    rgba(47, 73, 38, 0.035);
+
+  color:
+    #264d2d;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.recipe-chip:hover {
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 8px 16px
+    rgba(47, 73, 38, 0.07);
+}
+
+
+.recipe-chip-icon {
+  width: 31px;
+  height: 31px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    #f0f5e3;
+
+  color:
+    #66893d;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   DOWNLOAD BUTTON
+   ========================================================= */
+
+.recipe-download-btn {
+  min-width: 355px;
+  max-width: 100%;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 15px;
+
+  padding:
+    17px
+    28px;
+
+  border: 0;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  background:
+    linear-gradient(
+      135deg,
+      #789c42 0%,
+      #527b28 100%
+    );
+
+  color:
+    #ffffff;
+
+  text-decoration: none;
+
+  font-family:
+    "Montserrat",
+    sans-serif;
+
+  font-size: 17px;
+
+  font-weight: 800;
+
+  box-shadow:
+    0 9px 21px
+    rgba(81, 121, 42, 0.20);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.recipe-download-btn:hover {
+  transform:
+    translateY(-3px);
+
+  box-shadow:
+    0 13px 26px
+    rgba(81, 121, 42, 0.27);
+}
+
+
+.recipe-download-btn i {
+  font-size: 17px;
+}
+
+
+/* =========================================================
+   FREE NOTE
+   ========================================================= */
+
+.recipe-free-note {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  margin-top: 20px;
+
+  color:
+    #5a635a;
+
+  font-size: 12px;
+}
+
+
+.recipe-free-note i {
+  color:
+    #4c772f;
+
+  font-size: 15px;
+}
+
+
+.recipe-free-note strong {
+  color:
+    #284e2e;
+
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   RIGHT VISUAL
+   ========================================================= */
+
+.recipe-visual {
+  position: relative;
+
+  z-index: 5;
+
+  min-height: 520px;
+}
+
+
+/* BACK CIRCLE */
+
+.recipe-visual-circle {
+  position: absolute;
+
+  width: 450px;
+  height: 450px;
+
+  left: 50%;
+  top: 1px;
+
+  transform:
+    translateX(-50%);
+
+  border-radius: 50%;
+
+  background:
+    rgba(215, 230, 185, 0.22);
+}
+
+
+/* =========================================================
+   500G PACKAGE
+   ========================================================= */
+
+.recipe-product-img {
+  position: absolute;
+
+  z-index: 5;
+
+  width: 285px;
+  height: 455px;
+
+  object-fit: contain;
+
+  left: 34px;
+  top: 20px;
+
+  filter:
+    drop-shadow(
+      0 20px 20px
+      rgba(40, 61, 26, 0.15)
+    );
+
+  transition:
+    transform 0.3s ease;
+}
+
+
+.recipe-product-img:hover {
+  transform:
+    translateY(-5px)
+    rotate(-1deg);
+}
+
+
+/* =========================================================
+   NOTEBOOK
+   ========================================================= */
+
+.recipe-notebook {
+  position: absolute;
+
+  z-index: 7;
+
+  width: 235px;
+  height: 340px;
+
+  right: 15px;
+  top: 95px;
+
+  padding:
+    31px
+    22px
+    20px
+    34px;
+
+  border-radius: 4px 13px 13px 4px;
+
+  background:
+    #fffef8;
+
+  border:
+    1px solid
+    rgba(80, 102, 55, 0.17);
+
+  box-shadow:
+    0 17px 25px
+    rgba(46, 59, 35, 0.14);
+
+  transform:
+    rotate(5deg);
+
+  overflow: visible;
+}
+
+
+.recipe-notebook::after {
+  content: "";
+
+  position: absolute;
+
+  inset:
+    9px
+    9px
+    9px
+    16px;
+
+  border:
+    1px solid
+    rgba(92, 105, 72, 0.06);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   NOTEBOOK SPIRAL
+   ========================================================= */
+
+.recipe-notebook-rings {
+  position: absolute;
+
+  left: -8px;
+  top: 23px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 24px;
+
+  z-index: 10;
+}
+
+
+.recipe-notebook-rings span {
+  position: relative;
+
+  display: block;
+
+  width: 22px;
+  height: 4px;
+
+  border-radius: 10px;
+
+  background:
+    #52584b;
+
+  box-shadow:
+    0 2px 3px
+    rgba(0, 0, 0, 0.12);
+}
+
+
+.recipe-notebook-rings span::after {
+  content: "";
+
+  position: absolute;
+
+  right: -1px;
+  top: -4px;
+
+  width: 9px;
+  height: 9px;
+
+  border:
+    2px solid
+    #545a4d;
+
+  border-radius: 50%;
+
+  background:
+    transparent;
+}
+
+
+/* =========================================================
+   NOTEBOOK CONTENT
+   ========================================================= */
+
+.recipe-notebook-content {
+  position: relative;
+
+  z-index: 3;
+}
+
+
+.notebook-small {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color:
+    #6e755c;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+
+.notebook-line {
+  width: 100%;
+  height: 1px;
+
+  margin-bottom: 18px;
+
+  background:
+    rgba(133, 122, 80, 0.22);
+}
+
+
+.notebook-number-row {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  color:
+    #26482d;
+}
+
+
+.notebook-number {
+  color:
+    #b9a04e;
+
+  font-size: 57px;
+
+  line-height: 0.95;
+
+  font-weight: 800;
+}
+
+
+.notebook-number-row > div > strong {
+  display: block;
+
+  color:
+    #2a482e;
+
+  font-size: 15px;
+
+  line-height: 1.1;
+
+  font-weight: 900;
+}
+
+
+.notebook-number-row > div > span {
+  display: block;
+
+  margin-top: 4px;
+
+  color:
+    #587d35;
+
+  font-size: 15px;
+
+  font-weight: 800;
+}
+
+
+.notebook-category {
+  width: fit-content;
+
+  margin:
+    14px
+    0
+    14px;
+
+  padding:
+    4px
+    8px;
+
+  background:
+    #f5f0d7;
+
+  color:
+    #7a7252;
+
+  font-size: 8px;
+}
+
+
+/* =========================================================
+   NOTEBOOK PHOTOS
+   ========================================================= */
+
+.notebook-photo-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 5px;
+}
+
+
+.notebook-photo-grid img {
+  display: block;
+
+  width: 100%;
+  height: 79px;
+
+  object-fit: cover;
+
+  border-radius: 3px;
+}
+
+
+/* =========================================================
+   GIFT BADGE
+   ========================================================= */
+
+.recipe-gift-badge {
+  position: absolute;
+
+  z-index: 15;
+
+  right: 18px;
+  top: -3px;
+
+  width: 94px;
+  height: 94px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  border:
+    2px solid
+    #c99939;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff4bd,
+      #e7ba53
+    );
+
+  color:
+    #704c13;
+
+  text-align: center;
+
+  box-shadow:
+    0 8px 16px
+    rgba(170, 121, 30, 0.20);
+}
+
+
+.recipe-gift-icon {
+  margin-bottom: 4px;
+
+  font-size: 17px;
+}
+
+
+.recipe-gift-badge strong {
+  font-size: 11px;
+
+  line-height: 1.25;
+}
+
+
+/* =========================================================
+   POLAROIDS
+   ========================================================= */
+
+.recipe-polaroids {
+  position: absolute;
+
+  z-index: 14;
+
+  left: 35px;
+  right: 12px;
+
+  bottom: -15px;
+
+  display: flex;
+  align-items: flex-end;
+
+  justify-content: center;
+
+  gap: 0;
+}
+
+
+.recipe-polaroid {
+  width: 105px;
+  height: 125px;
+
+  flex-shrink: 0;
+
+  padding:
+    7px
+    7px
+    18px;
+
+  background:
+    #ffffff;
+
+  border:
+    1px solid
+    #e8e6dd;
+
+  box-shadow:
+    0 7px 13px
+    rgba(36, 50, 27, 0.14);
+}
+
+
+.recipe-polaroid img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+.polaroid-1 {
+  transform:
+    rotate(-8deg);
+
+  margin-right: -12px;
+}
+
+
+.polaroid-2 {
+  transform:
+    rotate(-2deg);
+
+  margin-right: -12px;
+}
+
+
+.polaroid-3 {
+  transform:
+    rotate(6deg);
+
+  margin-right: -12px;
+}
+
+
+.polaroid-4 {
+  transform:
+    rotate(11deg);
+}
+
+
+/* =========================================================
+   ROUND DOWNLOAD
+   ========================================================= */
+
+.recipe-round-download {
+  position: absolute;
+
+  z-index: 20;
+
+  left: 50%;
+  bottom: -35px;
+
+  transform:
+    translateX(-50%);
+
+  width: 66px;
+  height: 66px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  border:
+    4px solid
+    #5d7f38;
+
+  background:
+    #ffffff;
+
+  color:
+    #5d7f38;
+
+  font-size: 23px;
+
+  box-shadow:
+    0 8px 15px
+    rgba(40, 63, 26, 0.17);
+}
+
+
+/* =========================================================
+   BENEFITS BOTTOM BAR
+   ========================================================= */
+
+.recipe-benefits {
+  position: absolute;
+
+  z-index: 30;
+
+  left: 35px;
+  right: 35px;
+  bottom: 26px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  padding:
+    16px
+    13px;
+
+  border-radius: 15px;
+
+  border:
+    1px solid
+    rgba(66, 97, 44, 0.07);
+
+  background:
+    rgba(255, 255, 255, 0.91);
+
+  box-shadow:
+    0 7px 18px
+    rgba(47, 72, 36, 0.05);
+
+  backdrop-filter:
+    blur(6px);
+}
+
+
+.recipe-benefit-item {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  padding:
+    0
+    15px;
+}
+
+
+.recipe-benefit-item:not(:last-child)::after {
+  content: "";
+
+  position: absolute;
+
+  right: 0;
+  top: 50%;
+
+  width: 1px;
+  height: 37px;
+
+  transform:
+    translateY(-50%);
+
+  background:
+    rgba(70, 92, 57, 0.12);
+}
+
+
+.recipe-benefit-icon {
+  width: 40px;
+  height: 40px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    #f0f5e2;
+
+  color:
+    #557c31;
+
+  font-size: 16px;
+}
+
+
+.recipe-benefit-item strong,
+.recipe-benefit-item span {
+  display: block;
+}
+
+
+.recipe-benefit-item strong {
+  margin-bottom: 3px;
+
+  color:
+    #294d2f;
+
+  font-size: 10.5px;
+}
+
+
+.recipe-benefit-item span {
+  color:
+    #6d756e;
+
+  font-size: 12px;
+
+  line-height: 1.3;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+  .recipe-bonus-box {
+    grid-template-columns:
+      46% 54%;
+
+    padding:
+      45px
+      35px
+      120px;
+  }
+
+
+  .recipe-main-title {
+    font-size: 40px;
+  }
+
+
+  .recipe-product-img {
+    width: 240px;
+
+    left: 15px;
+  }
+
+
+  .recipe-notebook {
+    width: 215px;
+
+    right: 0;
+  }
+
+
+  .recipe-download-btn {
+    min-width: 100%;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE / TABLET
+   ========================================================= */
+
+@media (max-width: 820px) {
+
+  .recipe-bonus {
+    padding:
+      30px
+      0
+      55px;
+  }
+
+
+  .recipe-bonus-box {
+    display: flex;
+    flex-direction: column;
+
+    min-height: auto;
+
+    padding:
+      32px
+      22px
+      25px;
+
+    border-radius: 24px;
+  }
+
+
+  .recipe-content {
+    padding-right: 0;
+  }
+
+
+  .recipe-bonus-label {
+    margin-bottom: 20px;
+  }
+
+
+  .recipe-main-title {
+    font-size: 38px;
+  }
+
+
+  .recipe-description {
+    max-width: none;
+  }
+
+
+  .recipe-list-grid {
+    max-width: none;
+  }
+
+
+  .recipe-download-btn {
+    width: 100%;
+
+    min-width: 0;
+  }
+
+
+  /* ================= VISUAL ================= */
+
+  .recipe-visual {
+    width: 100%;
+
+    min-height: 590px;
+
+    margin-top: 35px;
+  }
+
+
+  .recipe-visual-circle {
+    width: 420px;
+    height: 420px;
+  }
+
+
+  .recipe-product-img {
+    width: 270px;
+    height: 420px;
+
+    left: 8%;
+  }
+
+
+  .recipe-notebook {
+    width: 230px;
+    height: 335px;
+
+    right: 4%;
+  }
+
+
+  .recipe-polaroids {
+    bottom: 17px;
+  }
+
+
+  .recipe-round-download {
+    bottom: -10px;
+  }
+
+
+  /* benefits no longer absolute */
+
+  .recipe-benefits {
+    position: relative;
+
+    left: auto;
+    right: auto;
+    bottom: auto;
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    margin-top: 30px;
+
+    row-gap: 18px;
+  }
+
+
+  .recipe-benefit-item:nth-child(2)::after {
+    display: none;
+  }
+
+}
+
+
+/* =========================================================
+   PHONE
+   ========================================================= */
+
+@media (max-width: 520px) {
+
+  .recipe-bonus .container {
+    width: calc(100% - 22px);
+  }
+
+
+  .recipe-bonus-box {
+    padding:
+      25px
+      14px
+      20px;
+  }
+
+
+  .recipe-bonus-label {
+    font-size: 10px;
+  }
+
+
+  .recipe-main-title {
+    font-size: clamp(28px, 8.7vw, 31px);
+
+    letter-spacing: -0.8px;
+  }
+
+
+  .recipe-description {
+    font-size: 12px;
+  }
+
+
+  .recipe-list-grid {
+    grid-template-columns: 1fr;
+
+    gap: 8px;
+  }
+
+
+  .recipe-chip {
+    min-height: 47px;
+  }
+
+
+  .recipe-download-btn {
+    font-size: 12px;
+
+    padding: 14px;
+  }
+
+
+  .recipe-free-note {
+    align-items: flex-start;
+
+    font-size: 10px;
+  }
+
+
+  /* VISUAL */
+
+  .recipe-visual {
+    min-height: 535px;
+
+    margin-top: 27px;
+  }
+
+
+  .recipe-visual-circle {
+    width: 310px;
+    height: 310px;
+
+    top: 55px;
+  }
+
+
+  .recipe-product-img {
+    width: 195px;
+    height: 330px;
+
+    left: -1px;
+    top: 45px;
+  }
+
+
+  .recipe-notebook {
+    width: 177px;
+    height: 287px;
+
+    right: 2px;
+    top: 80px;
+
+    padding:
+      25px
+      13px
+      14px
+      25px;
+  }
+
+
+  .notebook-number {
+    font-size: 43px;
+  }
+
+
+  .notebook-number-row > div > strong {
+    font-size: 11px;
+  }
+
+
+  .notebook-number-row > div > span {
+    font-size: 11px;
+  }
+
+
+  .notebook-photo-grid img {
+    height: 64px;
+  }
+
+
+  .recipe-gift-badge {
+    width: 72px;
+    height: 72px;
+
+    right: -2px;
+
+    font-size: 9px;
+  }
+
+
+  .recipe-gift-badge strong {
+    font-size: 8px;
+  }
+
+
+  /* POLAROIDS */
+
+  .recipe-polaroids {
+    left: 0;
+    right: 0;
+
+    bottom: 17px;
+  }
+
+
+  .recipe-polaroid {
+    width: 73px;
+    height: 91px;
+
+    padding:
+      5px
+      5px
+      13px;
+  }
+
+
+  .recipe-round-download {
+    width: 55px;
+    height: 55px;
+
+    bottom: -2px;
+
+    font-size: 18px;
+  }
+
+
+  /* BOTTOM BENEFITS */
+
+  .recipe-benefits {
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    padding:
+      14px
+      5px;
+
+    margin-top: 21px;
+  }
+
+
+  .recipe-benefit-item {
+    gap: 6px;
+
+    padding:
+      0
+      7px;
+  }
+
+
+  .recipe-benefit-icon {
+    width: 32px;
+    height: 32px;
+
+    font-size: 13px;
+  }
+
+
+  .recipe-benefit-item strong {
+    font-size: 9px;
+  }
+
+
+  .recipe-benefit-item span {
+    font-size: 10px;
+  }
+
+}
+/* =========================================================
+   MATCHA WORLD - MỘT SCENE NỀN XUYÊN SUỐT
+   Bao từ INTRO đến hết COMPANY
+   ========================================================= */
+
+.matcha-world {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #f7f8f1;
+}
+
+/* Một ảnh duy nhất phủ toàn wrapper; chuyển động chỉ nằm trên pseudo-element. */
+.matcha-world::before {
+  content: "";
+  position: absolute;
+  inset: -3%;
+  z-index: 0;
+  pointer-events: none;
+
+  background: url("images/matcha-ocean-long-bg.jpg") center top / cover no-repeat;
+
+  transform: translate3d(0, -10px, 0) scale(1.02);
+  transform-origin: center center;
+
+  animation: matchaWorldDrift 26s ease-in-out infinite alternate;
+}
+
+/* Overlay sáng ở giữa giúp nội dung nổi rõ trên scene. */
+.matcha-world::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 249, 0.12) 0%,
+    rgba(255, 255, 249, 0.46) 28%,
+    rgba(255, 255, 249, 0.72) 50%,
+    rgba(255, 255, 249, 0.46) 72%,
+    rgba(255, 255, 249, 0.12) 100%
+  );
+}
+
+/* Các section nằm trên hai lớp nền và giữ nền riêng trong suốt. */
+.matcha-world > section {
+  position: relative;
+  z-index: 2;
+  background: transparent !important;
+}
+
+@keyframes matchaWorldDrift {
+  from {
+    transform: translate3d(0, -10px, 0) scale(1.02);
+  }
+
+  to {
+    transform: translate3d(0, 10px, 0) scale(1.045);
+  }
+}
+
+/* Mobile: tăng nhẹ độ sáng của overlay để nội dung dễ đọc. */
+@media (max-width: 700px) {
+  .matcha-world::after {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 249, 0.48) 0%,
+      rgba(255, 255, 249, 0.72) 50%,
+      rgba(255, 255, 249, 0.48) 100%
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .matcha-world::before {
+    animation: none !important;
+  }
+
+  .site-nav,
+  .nav-toggle__bar {
+    transition: none;
+  }
+}
+/* ==================================================
+   FIX INTRO MOBILE - MATCHA OCEAN CHEF
+================================================== */
+
+@media (max-width: 600px) {
+
+  .intro {
+    padding: 34px 0 20px;
+  }
+
+  .intro-grid {
+    gap: 24px;
+    margin-bottom: 30px;
+  }
+
+  /* ===== TIÊU ĐỀ ===== */
+  .intro-center {
+    text-align: center;
+  }
+
+  .intro-title {
+    width: min(100%, 370px);
+    margin: 0 auto 14px;
+
+    font-size: 18px;
+    line-height: 1.35;
+    letter-spacing: -0.2px;
+
+    text-align: center;
+  }
+
+  .intro-title span {
+    display: block;
+
+    width: min(100%, 350px);
+    margin: 4px auto 0;
+
+    font-size: clamp(15px, 4vw, 17px);
+    line-height: 1.4;
+    letter-spacing: -0.15px;
+
+    /* Chrome sẽ chia câu thành các dòng cân hơn */
+    text-wrap: balance;
+  }
+
+  /* ===== MÔ TẢ ===== */
+  .intro-desc {
+    width: min(100%, 360px);
+    margin: 0 auto 22px;
+
+    font-size: 13px;
+    line-height: 1.65;
+
+    text-align: center;
+  }
+
+  /* ===== LIST ===== */
+  .intro-list {
+    width: min(100%, 380px);
+    margin: 0 auto;
+  }
+
+  .intro-list li {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 8px;
+
+    margin-bottom: 12px;
+
+    font-size: 12.5px;
+    line-height: 1.5;
+
+    text-align: left;
+  }
+
+  .intro-list li i {
+    width: 18px;
+    flex: 0 0 18px;
+
+    margin-top: 2px;
+
+    font-size: 15px;
+  }
+
+  /* Các nhãn thẳng hàng */
+  .intro-list li strong {
+    flex: 0 0 82px;
+
+    font-size: 12.5px;
+    white-space: nowrap;
+  }
+}
+/* ==========================================
+   FIX 5 DÒNG THÔNG TIN INTRO TRÊN MOBILE
+========================================== */
+@media (max-width: 600px) {
+
+  .intro-list {
+    width: 100%;
+    max-width: 390px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .intro-list li {
+    display: grid;
+
+    /* icon | tiêu đề | nội dung */
+    grid-template-columns: 20px 88px minmax(0, 1fr);
+
+    column-gap: 10px;
+    align-items: start;
+
+    width: 100%;
+    margin-bottom: 15px;
+
+    font-size: 12.5px;
+    line-height: 1.5;
+
+    text-align: left;
+  }
+
+  /* dấu tích */
+  .intro-list li i {
+    width: 20px;
+    height: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 1px 0 0;
+
+    font-size: 16px;
+    line-height: 1;
+
+    color: #168443;
+  }
+
+  /* Nguyên liệu / Hương vị / Ứng dụng... */
+  .intro-list li strong {
+    width: auto;
+    min-width: 0;
+
+    font-size: 12.5px;
+    font-weight: 800;
+    line-height: 1.5;
+
+    white-space: nowrap;
+    color: #252525;
+  }
+}
