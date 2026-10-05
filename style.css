@@ -240,7 +240,7 @@ img {
   padding: 80px 0;
   overflow: hidden;
   /* Chèn đúng tên ảnh của bạn vào đây */
-  background: url("images/bannermoinhat10000.png") right center / cover no-repeat;
+  background: url("images/bannermoinhat10000.webp") right center / cover no-repeat;
   min-height: 650px;
   display: flex;
   align-items: center;
@@ -2350,7 +2350,7 @@ img {
   border: 1px solid rgba(92, 118, 57, 0.15);
 
   background:
-    url("images/company-about-bg.png")
+    url("images/company-about-bg.webp")
     center center / cover no-repeat;
 
   box-shadow:
@@ -2581,7 +2581,7 @@ img {
     border-radius: 20px;
     background:
       #f8f9f0
-      url("images/company-about-bg.png") center bottom / 100% auto no-repeat;
+      url("images/company-about-bg.webp") center bottom / 100% auto no-repeat;
   }
 
   .company-about__content {
@@ -4326,7 +4326,7 @@ footer {
   z-index: 0;
   pointer-events: none;
 
-  background: url("images/matcha-ocean-long-bg.jpg") center top / cover no-repeat;
+  background: url("images/matcha-ocean-long-bg.webp") center top / cover no-repeat;
 
   transform: translate3d(0, -10px, 0) scale(1.02);
   transform-origin: center center;
